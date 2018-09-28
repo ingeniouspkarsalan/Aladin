@@ -25,7 +25,10 @@
         </activity>
         <activity android:name=".Activities.Signin" />
         <activity android:name=".Activities.Signup" />
-        <activity android:name=".Activities.Home"></activity>
+        <activity
+            android:name=".Activities.Home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
