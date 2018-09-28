@@ -1,4 +1,4 @@
-package com.dinable.dinable.AppUtils;
+package ustaad.aladin.com.Utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;

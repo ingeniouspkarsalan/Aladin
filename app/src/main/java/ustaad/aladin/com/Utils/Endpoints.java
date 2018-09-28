@@ -1,4 +1,4 @@
-package com.dinable.dinable.AppUtils;
+package ustaad.aladin.com.Utils;
 
 public class Endpoints
 {
