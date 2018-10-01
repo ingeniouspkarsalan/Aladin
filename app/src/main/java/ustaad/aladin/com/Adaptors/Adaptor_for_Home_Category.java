@@ -1,6 +1,7 @@
 package ustaad.aladin.com.Adaptors;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import ustaad.aladin.com.R;
 import ustaad.aladin.com.classes.layout_category_class;
+import ustaad.aladin.com.maps.MapsActivity;
 
 public class Adaptor_for_Home_Category extends BaseAdapter {
     private List<layout_category_class> layoutCategoryClassList;
@@ -47,6 +49,12 @@ public class Adaptor_for_Home_Category extends BaseAdapter {
         tt.setText(cc.getCategory_text());
         ImageView imageView=row.findViewById(R.id.cat_card_img);
         imageView.setBackground(cc.getImage_id());
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, MapsActivity.class));
+            }
+        });
         return row;
     }
 }
