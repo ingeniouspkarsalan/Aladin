@@ -45,32 +45,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        // Add a marker in Sydney, Australia, and move the camera.
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+
+
         //When Map Loads Successfully
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                //Your code where exception occurs goes here...
-                List<LatLng> locations = new ArrayList<>();
-                locations.add(new LatLng(24.821730,67.024680));
-                locations.add(new LatLng(24.823327,67.028414));
-                locations.add(new LatLng(24.823288,67.031568));
-                locations.add(new LatLng(24.824677,67.033982));
-                locations.add(new LatLng(24.823093,67.035559));
-                locations.add(new LatLng(24.822489,67.036632));
-
-                for(LatLng latLng : locations) {
-                    mMap.addMarker(new MarkerOptions().position(latLng).title("Title can be anything"));
-                }
-
-                //LatLngBound will cover all your marker on Google Maps
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                builder.include(locations.get(0)); //Taking Point A (First LatLng)
-                builder.include(locations.get(locations.size() - 1)); //Taking Point B (Second LatLng)
-                LatLngBounds bounds = builder.build();
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
-                mMap.moveCamera(cu);
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
-            }
-        });
+//        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+//            @Override
+//            public void onMapLoaded() {
+//                //Your code where exception occurs goes here...
+//                List<LatLng> locations = new ArrayList<>();
+//                locations.add(new LatLng(24.821730,67.024680));
+//                locations.add(new LatLng(24.823327,67.028414));
+//                locations.add(new LatLng(24.823288,67.031568));
+//                locations.add(new LatLng(24.824677,67.033982));
+//                locations.add(new LatLng(24.823093,67.035559));
+//                locations.add(new LatLng(24.822489,67.036632));
+//
+//                for(LatLng latLng : locations) {
+//                    mMap.addMarker(new MarkerOptions().position(latLng).title("Title can be anything"));
+//                }
+//
+//                //LatLngBound will cover all your marker on Google Maps
+//                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//                builder.include(locations.get(0)); //Taking Point A (First LatLng)
+//                builder.include(locations.get(locations.size() - 1)); //Taking Point B (Second LatLng)
+//                LatLngBounds bounds = builder.build();
+//                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
+//                mMap.moveCamera(cu);
+//                mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
+//            }
+//        });
     }
 }
