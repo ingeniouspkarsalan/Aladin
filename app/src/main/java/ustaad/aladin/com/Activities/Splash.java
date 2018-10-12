@@ -16,7 +16,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_splash);
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -30,9 +30,9 @@ public class Splash extends AppCompatActivity {
 //        }, SPLASH_TIME_OUT);
 
         try {
-            VideoView videoHolder = new VideoView(this);
-            setContentView(videoHolder);
-            Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.forsplash);
+            VideoView videoHolder =findViewById(R.id.play_splash);
+            //setContentView(videoHolder);
+            Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.aladin_splash);
             videoHolder.setVideoURI(video);
 
             videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -58,7 +58,8 @@ public class Splash extends AppCompatActivity {
     private void jump() {
         if (isFinishing())
             return;
-        startActivity(new Intent(this, Home.class));
+        startActivity(new Intent(this, Signin.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
     }
 }
