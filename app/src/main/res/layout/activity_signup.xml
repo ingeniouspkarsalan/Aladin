@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/colorPrimaryDark"
     tools:context=".Activities.Signup">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_sing_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:text="Sing In"
+        android:background="@color/white"
+        android:paddingStart="5dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40dp" />
+
+
+    <Button
+        android:id="@+id/sing_in_btn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/btn_sing_up"
+        android:fontFamily="sans-serif-light"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/white"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentEnd="true"
+        android:drawableBottom="@drawable/login_arrow"
+        android:textColor="@color/colorPrimaryDark" />
+
+
+
+
+
+</RelativeLayout>
