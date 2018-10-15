@@ -82,6 +82,7 @@
             android:layout_height="200dp"
             android:background="@drawable/v1"
             android:scaleType="centerCrop"
+            android:backgroundTint="@color/white"
             android:layout_alignParentBottom="true"/>
 
         <TextView
@@ -89,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
-            android:text="Sing Up"
+            android:text="Sign Up"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:paddingStart="5dp"
