@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.VideoView;
 
+import com.pixplicity.easyprefs.library.Prefs;
+
 import ustaad.aladin.com.R;
 
 public class Splash extends AppCompatActivity {
@@ -28,6 +30,14 @@ public class Splash extends AppCompatActivity {
 //
 //            }
 //        }, SPLASH_TIME_OUT);
+        //To check if user logged in
+        Boolean isLoginSucces = Prefs.getBoolean("loginSuccess",false);
+        if(isLoginSucces) {
+            //start activity..
+            Intent intent = new Intent(Splash.this,Home.class);
+            startActivity(intent);
+            finish();
+        }
 
         try {
             VideoView videoHolder =findViewById(R.id.play_splash);

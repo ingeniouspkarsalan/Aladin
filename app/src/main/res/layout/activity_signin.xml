@@ -90,7 +90,7 @@
             android:fontFamily="sans-serif-light"
             android:paddingLeft="20dp"
             android:paddingRight="10dp"
-            android:text="Sing In     "
+            android:text="Sign In     "
             android:drawableRight="@drawable/ic_send_black_24dp"
             android:textAllCaps="false"
             android:textColor="@color/white"

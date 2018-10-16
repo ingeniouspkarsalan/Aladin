@@ -24,6 +24,7 @@ import ustaad.aladin.com.R;
 import ustaad.aladin.com.Utils.Endpoints;
 import ustaad.aladin.com.Utils.Utils;
 import ustaad.aladin.com.classes.Animation;
+import ustaad.aladin.com.fcm_classes.SharedPrefManager;
 
 public class Signup extends AppCompatActivity {
 
@@ -44,6 +45,7 @@ public class Signup extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(Signup.this, Signin.class));
                 Animation.slideDown(Signup.this);
+                finish();
             }
         });
     }
@@ -67,15 +69,15 @@ public class Signup extends AppCompatActivity {
         if(!TextUtils.isEmpty(nametxt.getText().toString()) & !TextUtils.isEmpty(usertxt.getText().toString()) & !TextUtils.isEmpty(emailtxt.getText().toString()) & !TextUtils.isEmpty(passtxt.getText().toString())
                ){
 
-           // String token = SharedPrefManager.getInstance(this).getDeviceToken();
+            String token = SharedPrefManager.getInstance(this).getDeviceToken();
 
             //if token is not null
-//            if (token != null) {
-//                //calling funtion
-//                signup(nametxt.getText().toString(),usertxt.getText().toString(),emailtxt.getText().toString(),passtxt.getText().toString(),token);
-//            } else {
-//                signup(nametxt.getText().toString(),usertxt.getText().toString(),emailtxt.getText().toString(),passtxt.getText().toString(),"");
-//            }
+            if (token != null) {
+                //calling funtion
+                signup(nametxt.getText().toString(),usertxt.getText().toString(),emailtxt.getText().toString(),passtxt.getText().toString(),token);
+            } else {
+                signup(nametxt.getText().toString(),usertxt.getText().toString(),emailtxt.getText().toString(),passtxt.getText().toString(),"");
+            }
 
 
 
@@ -94,8 +96,9 @@ public class Signup extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.put("req_key","user_registration");
         params.put("name",name);
-        params.put("email",email);
-        params.put("pass",password);
+        params.put("user_name",usrname);
+        params.put("user_email",email);
+        params.put("password",password);
         params.put("fcm_id",token);
         client.post(Endpoints.ip_server, params, new AsyncHttpResponseHandler()
         {

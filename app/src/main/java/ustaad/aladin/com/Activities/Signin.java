@@ -25,6 +25,7 @@ import ustaad.aladin.com.R;
 import ustaad.aladin.com.Utils.Endpoints;
 import ustaad.aladin.com.Utils.Utils;
 import ustaad.aladin.com.classes.Animation;
+import ustaad.aladin.com.fcm_classes.SharedPrefManager;
 
 public class Signin extends AppCompatActivity {
 
@@ -69,10 +70,16 @@ public class Signin extends AppCompatActivity {
     private void scaningallfields(){
         if(!TextUtils.isEmpty(email.getText().toString()) & !TextUtils.isEmpty(password.getText().toString())){
 
-           // sign_in(email.getText().toString(),password.getText().toString());
-            startActivity(new Intent(Signin.this, Home.class));
-            finish();
-            Animation.slideUp(Signin.this);
+
+            String token = SharedPrefManager.getInstance(this).getDeviceToken();
+
+            //if token is not null
+            if (token != null) {
+                //calling funtion
+                sign_in(email.getText().toString(),password.getText().toString(),token);
+            } else {
+                sign_in(email.getText().toString(),password.getText().toString(),"");
+            }
 
 
         }else{
@@ -85,13 +92,14 @@ public class Signin extends AppCompatActivity {
 
 
     // Declear the Registration Function
-    private void sign_in(String email, String password)
+    private void sign_in(String email, String password,String token)
     {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("req_key","user_login");
         params.put("email",email);
         params.put("pass",password);
+        params.put("fcm_id",token);
         client.post(Endpoints.ip_server, params, new AsyncHttpResponseHandler()
         {
             @Override
