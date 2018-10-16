@@ -17,8 +17,10 @@ import ustaad.aladin.com.classes.layout_category_class;
 import ustaad.aladin.com.maps.MapsActivity;
 
 public class Adaptor_for_Home_Category extends BaseAdapter {
+
     private List<layout_category_class> layoutCategoryClassList;
     private Context context;
+
     public Adaptor_for_Home_Category(Context c,List<layout_category_class> layoutCategoryClassList){
         this.layoutCategoryClassList=layoutCategoryClassList;
         this.context=c;
