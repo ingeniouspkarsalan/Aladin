@@ -21,8 +21,7 @@ import ustaad.aladin.com.Adaptors.Adaptor_for_Home_Category;
 import ustaad.aladin.com.R;
 import ustaad.aladin.com.classes.layout_category_class;
 
-public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private List<layout_category_class> layoutCategoryClassList;
     private Adaptor_for_Home_Category adaptor_for_home_category;
     private GridView gridView;
