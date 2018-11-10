@@ -29,16 +29,13 @@
         android:text=""
         android:drawableRight="@drawable/search_icon"
         android:background="@color/colorPrimaryDark"/>
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/gridview"
-        android:gravity="center"
-        android:numColumns="3"
-        android:stretchMode="columnWidth"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        android:verticalSpacing="5dp"
 
-        />
+    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recylcerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_demo_child_count="10"
+        app:shimmer_demo_angle="20"
+        android:layout_weight="1"/>
 </LinearLayout>

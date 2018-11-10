@@ -3,6 +3,10 @@ package ustaad.aladin.com.Activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -23,8 +28,10 @@ import ustaad.aladin.com.classes.layout_category_class;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private List<layout_category_class> layoutCategoryClassList;
+    private List<layout_category_class> searchCategoryClassList;
     private Adaptor_for_Home_Category adaptor_for_home_category;
-    private GridView gridView;
+    private RecyclerView recyclerView;
+    private EditText et_for_search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +42,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         //calling all widget from layout
         initing();
+        //init search
+        Search_int();
 
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,11 +58,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
     public void initing(){
+        recyclerView=findViewById(R.id.recylcerView);
         layoutCategoryClassList=new ArrayList<>();
         adding_categories();
         adaptor_for_home_category=new Adaptor_for_Home_Category(this,layoutCategoryClassList);
-        gridView=findViewById(R.id.gridview);
-        gridView.setAdapter(adaptor_for_home_category);
+        recyclerView.setAdapter(adaptor_for_home_category);
+        recyclerView.setLayoutManager(new GridLayoutManager(Home.this,3));
     }
 
     private void adding_categories(){
@@ -77,25 +77,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c8),"Car"));
         layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c9),"Plug"));
 
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c1),"Shopping"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c2),"Furniture"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c3),"Cloth"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c4),"Real State"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c5),"Computer"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c6),"Hardware"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c7),"Cargo"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c8),"Car"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c9),"Plug"));
-
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c1),"Shopping"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c2),"Furniture"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c3),"Cloth"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c4),"Real State"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c5),"Computer"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c6),"Hardware"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c7),"Cargo"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c8),"Car"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c9),"Plug"));
     }
 
     @Override
@@ -153,5 +134,42 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    private void Search_int(){
+
+        et_for_search =  findViewById(R.id.et_for_search);
+        et_for_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                search(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private void search(String word)
+    {
+        searchCategoryClassList = new ArrayList<>();
+        if(searchCategoryClassList != null)
+            for (layout_category_class list : searchCategoryClassList)
+            {
+                if(list != null)
+                    if(list.getCategory_text().toLowerCase().contains(word))
+                    {
+                        searchCategoryClassList.add(list);
+                    }
+            }
+        adaptor_for_home_category.searchedList(searchCategoryClassList);
     }
 }

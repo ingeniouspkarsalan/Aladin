@@ -2,6 +2,9 @@ package ustaad.aladin.com.Adaptors;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,53 +13,72 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import ustaad.aladin.com.R;
 import ustaad.aladin.com.classes.layout_category_class;
 import ustaad.aladin.com.maps.MapsActivity;
 
-public class Adaptor_for_Home_Category extends BaseAdapter {
-
-    private List<layout_category_class> layoutCategoryClassList;
+public class Adaptor_for_Home_Category extends RecyclerView.Adapter<Adaptor_for_Home_Category.CatViewHolder>
+{
     private Context context;
+    private List<layout_category_class> layoutCategoryClassList;
 
-    public Adaptor_for_Home_Category(Context c,List<layout_category_class> layoutCategoryClassList){
-        this.layoutCategoryClassList=layoutCategoryClassList;
-        this.context=c;
+
+    class CatViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
+        ImageView card_image;
+        TextView card_text;
+
+        public CatViewHolder(View itemView)
+        {
+            super(itemView);
+            cardView=itemView.findViewById(R.id.card_view);
+            card_image=itemView.findViewById(R.id.cat_card_img);
+            card_text=itemView.findViewById(R.id.cat_card_text);
+        }
+    }
+
+    public Adaptor_for_Home_Category(Context context, List<layout_category_class> layout_category_classList) {
+        this.context = context;
+        this.layoutCategoryClassList = layout_category_classList;
     }
 
     @Override
-    public int getCount() {
-        return layoutCategoryClassList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return position;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        layout_category_class cc=layoutCategoryClassList.get(position);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View row;
-        row = inflater.inflate(R.layout.layout_for_categories, parent, false);
-        TextView tt=row.findViewById(R.id.cat_card_text);
-        tt.setText(cc.getCategory_text());
-        ImageView imageView=row.findViewById(R.id.cat_card_img);
-        imageView.setBackground(cc.getImage_id());
-        imageView.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(CatViewHolder holder , int position)
+    {
+        final layout_category_class layout_category_class = layoutCategoryClassList.get(position);
+        holder.card_image.setImageDrawable(layout_category_class.getImage_id());
+        holder.card_image.setColorFilter(ContextCompat.getColor(context, R.color.hint), android.graphics.PorterDuff.Mode.MULTIPLY);
+        holder.card_text.setText(layout_category_class.getCategory_text());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, MapsActivity.class));
             }
         });
-        return row;
+
+
     }
+
+    @Override
+    public CatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.layout_for_categories, null);
+        return new CatViewHolder(view);
+    }
+
+    @Override
+    public int getItemCount() {
+        return layoutCategoryClassList.size();
+    }
+
+    public void searchedList(List<layout_category_class> _list)
+    {
+        layoutCategoryClassList = _list;
+        notifyDataSetChanged();
+    }
+
+
 }

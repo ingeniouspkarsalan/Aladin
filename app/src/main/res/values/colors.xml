@@ -10,5 +10,6 @@
 
 
     <color name="transparent">#730e0e0e</color>
+    <color name="hint">#730e0e0e</color>
     <color name="transparent_for_signup">#51020202</color>
 </resources>
