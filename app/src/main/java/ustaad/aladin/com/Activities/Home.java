@@ -162,7 +162,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     {
         searchCategoryClassList = new ArrayList<>();
         if(searchCategoryClassList != null)
-            for (layout_category_class list : searchCategoryClassList)
+            for (layout_category_class list : layoutCategoryClassList)
             {
                 if(list != null)
                     if(list.getCategory_text().toLowerCase().contains(word))

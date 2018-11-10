@@ -1,7 +1,9 @@
 package ustaad.aladin.com.maps;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -10,11 +12,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ustaad.aladin.com.Activities.Item_page;
 import ustaad.aladin.com.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -67,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 locations.add(new LatLng(24.822489,67.036632));
 
                 for(LatLng latLng : locations) {
-                    mMap.addMarker(new MarkerOptions().position(latLng).title("Title can be anything"));
+                    mMap.addMarker(new MarkerOptions().position(latLng).title("pop up"));
                 }
 
                 //LatLngBound will cover all your marker on Google Maps
@@ -78,6 +82,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
                 mMap.moveCamera(cu);
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
+
+                // Setting a custom info window adapter for the google map
+                MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
+                mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
+
+
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                       marker.showInfoWindow();
+                        return true;
+                    }
+                });
+
+                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        startActivity(new Intent(MapsActivity.this, Item_page.class));
+                    }
+                });
+
             }
         });
     }
