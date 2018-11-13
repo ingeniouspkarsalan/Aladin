@@ -46,7 +46,12 @@ public class Adapter_business extends RecyclerView.Adapter<Adapter_business.busi
     @Override
     public void onBindViewHolder(businessViewHolder holder, int position) {
     final bus_list_class bus_list_class=bus_list_classList.get(position);
-    Glide.with(context).load(bus_list_class.getB_image()).into(holder.bus_card_image);
+    if(!bus_list_class.getB_image().isEmpty()){
+        Glide.with(context).load(bus_list_class.getB_image()).into(holder.bus_card_image);
+    }else {
+        holder.bus_card_image.setImageDrawable(context.getResources().getDrawable(R.drawable.banner));
+    }
+
     holder.bus_card_name.setText(" "+bus_list_class.getB_name());
     holder.bus_card_contact.setText(" "+bus_list_class.getB_mobile());
     holder.bus_card_city.setText(" "+bus_list_class.getB_city());
@@ -54,8 +59,8 @@ public class Adapter_business extends RecyclerView.Adapter<Adapter_business.busi
 
     @Override
     public businessViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.card_bus_list, null);
+        LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflator.inflate(R.layout.card_bus_list, null);
         return new businessViewHolder(view);
     }
 
