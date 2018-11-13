@@ -85,7 +85,7 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
 
                     // Setting a custom info window adapter for the google map
-                    MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getContext());
+                    MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getContext(),bus_list_classes);
                     mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
 
 

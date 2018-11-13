@@ -84,24 +84,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
 
                 // Setting a custom info window adapter for the google map
-                MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
-                mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
-
-
-                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                       marker.showInfoWindow();
-                        return true;
-                    }
-                });
-
-                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker marker) {
-                        startActivity(new Intent(MapsActivity.this, Item_page.class));
-                    }
-                });
+//                MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
+//                mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
+//
+//
+//                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//                    @Override
+//                    public boolean onMarkerClick(Marker marker) {
+//                       marker.showInfoWindow();
+//                        return true;
+//                    }
+//                });
+//
+//                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//                    @Override
+//                    public void onInfoWindowClick(Marker marker) {
+//                        startActivity(new Intent(MapsActivity.this, Item_page.class));
+//                    }
+//                });
 
             }
         });
