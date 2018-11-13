@@ -9,11 +9,11 @@ public class bus_list_class implements Parcelable{
     private String b_image;
     private String b_mobile;
     private String b_city;
-    private Long b_lat;
-    private Long b_long;
+    private Double b_lat;
+    private Double b_long;
 
 
-    public bus_list_class(String b_id, String b_name, String b_image, String b_mobile, String b_city, Long b_lat, Long b_long) {
+    public bus_list_class(String b_id, String b_name, String b_image, String b_mobile, String b_city, Double b_lat, Double b_long) {
         this.b_id = b_id;
         this.b_name = b_name;
         this.b_image = b_image;
@@ -30,8 +30,8 @@ public class bus_list_class implements Parcelable{
         b_image = in.readString();
         b_mobile = in.readString();
         b_city = in.readString();
-        b_lat = in.readLong();
-        b_long = in.readLong();
+        b_lat = in.readDouble();
+        b_long = in.readDouble();
     }
 
     public static final Creator<bus_list_class> CREATOR = new Creator<bus_list_class>() {
@@ -58,8 +58,8 @@ public class bus_list_class implements Parcelable{
         dest.writeString(b_image);
         dest.writeString(b_mobile);
         dest.writeString(b_city);
-        dest.writeLong(b_lat);
-        dest.writeLong(b_long);
+        dest.writeDouble(b_lat);
+        dest.writeDouble(b_long);
     }
 
     public String getB_id() {
@@ -82,11 +82,11 @@ public class bus_list_class implements Parcelable{
         return b_city;
     }
 
-    public Long getB_lat() {
+    public Double getB_lat() {
         return b_lat;
     }
 
-    public Long getB_long() {
+    public Double getB_long() {
         return b_long;
     }
 }
