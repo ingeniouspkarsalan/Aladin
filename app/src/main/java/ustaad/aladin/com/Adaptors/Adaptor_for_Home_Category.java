@@ -13,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -49,9 +51,9 @@ public class Adaptor_for_Home_Category extends RecyclerView.Adapter<Adaptor_for_
     public void onBindViewHolder(CatViewHolder holder , int position)
     {
         final layout_category_class layout_category_class = layoutCategoryClassList.get(position);
-        holder.card_image.setImageDrawable(layout_category_class.getImage_id());
+        Glide.with(context).load(layout_category_class.getCategory_image()).into(holder.card_image);
         holder.card_image.setColorFilter(ContextCompat.getColor(context, R.color.hint), android.graphics.PorterDuff.Mode.MULTIPLY);
-        holder.card_text.setText(layout_category_class.getCategory_text());
+        holder.card_text.setText(layout_category_class.getCategory_name());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

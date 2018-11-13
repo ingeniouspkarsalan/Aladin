@@ -33,25 +33,25 @@ public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         LatLng latLng = arg0.getPosition();
         TextView name =  v.findViewById(R.id.name);
         ImageView image= v.findViewById(R.id.image);
-        if(latLng.latitude==24.821730 && latLng.longitude==67.024680){
-            name.setText("shopping");
-            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c1));
-        }else if(latLng.latitude==24.823327 && latLng.longitude==67.028414){
-            name.setText("furniture");
-            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c2));
-        }else if(latLng.latitude==24.823288 && latLng.longitude==67.031568){
-            name.setText("cloth");
-            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c3));
-        }else if(latLng.latitude==24.824677 && latLng.longitude==67.033982){
-            name.setText("Real State");
-            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c4));
-        }else if(latLng.latitude==24.823093 && latLng.longitude==67.035559){
-            name.setText("Computer");
-            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c5));
-        }else if(latLng.latitude==24.822489 && latLng.longitude==67.036632){
-            name.setText("Hardware");
-            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c6));
-        }
+//        if(latLng.latitude==24.821730 && latLng.longitude==67.024680){
+//            name.setText("shopping");
+//            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c1));
+//        }else if(latLng.latitude==24.823327 && latLng.longitude==67.028414){
+//            name.setText("furniture");
+//            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c2));
+//        }else if(latLng.latitude==24.823288 && latLng.longitude==67.031568){
+//            name.setText("cloth");
+//            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c3));
+//        }else if(latLng.latitude==24.824677 && latLng.longitude==67.033982){
+//            name.setText("Real State");
+//            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c4));
+//        }else if(latLng.latitude==24.823093 && latLng.longitude==67.035559){
+//            name.setText("Computer");
+//            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c5));
+//        }else if(latLng.latitude==24.822489 && latLng.longitude==67.036632){
+//            name.setText("Hardware");
+//            image.setImageDrawable(context.getResources().getDrawable(R.drawable.c6));
+//        }
 
 
 

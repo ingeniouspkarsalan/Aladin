@@ -18,12 +18,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.pixplicity.easyprefs.library.Prefs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import es.dmoral.toasty.Toasty;
 import ustaad.aladin.com.Adaptors.Adaptor_for_Home_Category;
 import ustaad.aladin.com.R;
+import ustaad.aladin.com.Utils.Endpoints;
+import ustaad.aladin.com.Utils.Utils;
+import ustaad.aladin.com.classes.JSONParser;
 import ustaad.aladin.com.classes.layout_category_class;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,24 +76,62 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     public void initing(){
         recyclerView=findViewById(R.id.recylcerView);
-        layoutCategoryClassList=new ArrayList<>();
-        adding_categories();
-        adaptor_for_home_category=new Adaptor_for_Home_Category(this,layoutCategoryClassList);
-        recyclerView.setAdapter(adaptor_for_home_category);
-        recyclerView.setLayoutManager(new GridLayoutManager(Home.this,3));
+        if (Utils.isOnline(Home.this)) {
+            try {
+                requestData();
+            } catch (Exception ex) {
+                new SweetAlertDialog(Home.this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText("Some thing went wrong!")
+                        .show();
+            }
+        } else {
+            new SweetAlertDialog(Home.this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText("Internet Not Found!")
+                    .show();
+        }
+
     }
 
-    private void adding_categories(){
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c1),"Shopping"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c2),"Furniture"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c3),"Cloth"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c4),"Real State"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c5),"Computer"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c6),"Hardware"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c7),"Cargo"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c8),"Car"));
-        layoutCategoryClassList.add(new layout_category_class(this.getResources().getDrawable(R.drawable.c9),"Plug"));
 
+    //fetching all categories of subcategory
+    public void requestData() {
+        final String id = Prefs.getString("user_id", "0");
+        StringRequest request = new StringRequest(Request.Method.POST, Endpoints.ip_server, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.contains("null")) {
+                    Toasty.warning(Home.this, "Categories not available.", Toast.LENGTH_LONG).show();
+                } else {
+                    layoutCategoryClassList = JSONParser.parse_category(response);
+                    adaptor_for_home_category=new Adaptor_for_Home_Category(Home.this,layoutCategoryClassList);
+                    recyclerView.setAdapter(adaptor_for_home_category);
+                    recyclerView.setLayoutManager(new GridLayoutManager(Home.this,3));
+
+                }
+
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new SweetAlertDialog(Home.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText("Some thing went wrong!")
+                                .show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("req_key", "all_category");
+                return params;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
     }
 
     @Override
@@ -165,7 +220,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             for (layout_category_class list : layoutCategoryClassList)
             {
                 if(list != null)
-                    if(list.getCategory_text().toLowerCase().contains(word))
+                    if(list.getCategory_name().toLowerCase().contains(word))
                     {
                         searchCategoryClassList.add(list);
                     }

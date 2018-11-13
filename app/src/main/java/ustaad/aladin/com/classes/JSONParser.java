@@ -22,7 +22,12 @@ public class JSONParser {
             for(int i = 0; i < jsonArray.length(); i++)
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                //layout_category_class = new layout_category_class();
+                layout_category_class = new layout_category_class();
+                layout_category_class.setCategory_id(jsonObject.getString("c_id"));
+                layout_category_class.setCategory_name(jsonObject.getString("c_name"));
+                layout_category_class.setCategory_image(jsonObject.getString("c_icon"));
+                layout_category_class.setIs_product_or_service(jsonObject.getString("p_or_s"));
+                layout_category_class.setParrent(jsonObject.getString("parrent"));
 
 
 
