@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragment_activities.Business_lists">
+
     <com.cooltechworks.views.shimmer.ShimmerRecyclerView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recyclerview"
@@ -13,4 +14,5 @@
         android:layout_height="match_parent"
         app:shimmer_demo_child_count="10"
         app:shimmer_demo_angle="20" />
+
 </LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card_view"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.github.florent37.shapeofview.shapes.CutCornerView
+                android:id="@+id/clipCorner"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:elevation="4dp"
+                app:shape_cutCorner_bottomRightSize="20dp">
+
+                <ImageView
+                    android:id="@+id/bus_card_img"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"/>
+
+            </com.github.florent37.shapeofview.shapes.CutCornerView>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/bus_card_name"
+                android:text=" name"
+                android:textSize="16dp"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:drawableStart="@drawable/ic_short_text_black_24dp"
+                android:textAlignment="center"
+                android:textColor="@color/hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/bus_card_contact"
+                   android:textSize="16dp"
+                   android:drawableStart="@drawable/ic_contact_phone_black_24dp"
+                   android:text=" +923313435367"
+                   android:padding="5dp"
+                   android:textAlignment="center"
+                   android:textColor="@color/hint"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:text=" karachi."
+                   android:id="@+id/bus_card_city"
+                   android:paddingLeft="5dp"
+                   android:drawableStart="@drawable/ic_location_city_black_24dp"
+                   android:textSize="16dp"
+                   android:padding="5dp"
+                   android:textAlignment="center"
+                   android:textColor="@color/hint"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
