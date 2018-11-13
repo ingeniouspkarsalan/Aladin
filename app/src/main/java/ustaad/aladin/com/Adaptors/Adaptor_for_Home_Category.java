@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.Calendar;
 import java.util.List;
 
+import ustaad.aladin.com.Activities.Cat_business_list;
 import ustaad.aladin.com.R;
 import ustaad.aladin.com.classes.layout_category_class;
 import ustaad.aladin.com.maps.MapsActivity;
@@ -57,7 +58,10 @@ public class Adaptor_for_Home_Category extends RecyclerView.Adapter<Adaptor_for_
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, MapsActivity.class));
+                Intent in=new Intent(context,Cat_business_list.class);
+                in.putExtra("cat_id",layout_category_class.getCategory_id());
+                in.putExtra("cat_name",layout_category_class.getCategory_name());
+                context.startActivity(in);
             }
         });
 

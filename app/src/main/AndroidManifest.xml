@@ -67,7 +67,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Activities.Item_page"></activity>
+        <activity android:name=".Activities.Item_page" />
+        <activity android:name=".Activities.Cat_business_list" />
+        <activity android:name=".Fragment_activities.Business_lists" />
+        <activity android:name=".Fragment_activities.Map_activity"></activity>
     </application>
 
 </manifest>
