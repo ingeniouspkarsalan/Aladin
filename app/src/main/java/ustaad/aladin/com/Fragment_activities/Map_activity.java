@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
-        import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -62,17 +66,11 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                         for(int i=0;i<bus_list_classes.size();i++){
                             if(bus_list_classes.get(i).getB_lat() !=0 && bus_list_classes.get(i).getB_long() !=0){
                                 locations.add(new LatLng(bus_list_classes.get(i).getB_lat(),bus_list_classes.get(i).getB_long()));
-                                mMap.addMarker(new MarkerOptions().position(new LatLng(bus_list_classes.get(i).getB_lat(),bus_list_classes.get(i).getB_long())).title("pop up"));
+                                mMap.addMarker(new MarkerOptions().position(new LatLng(bus_list_classes.get(i).getB_lat(),bus_list_classes.get(i).getB_long())).title(bus_list_classes.get(i).getB_name()));
                             }
                         }
                     }
-//                locations.add(new LatLng(24.821730,67.024680));
-//                locations.add(new LatLng(24.823327,67.028414));
-//                locations.add(new LatLng(24.823288,67.031568));
-//                locations.add(new LatLng(24.824677,67.033982));
-//                locations.add(new LatLng(24.823093,67.035559));
-//                locations.add(new LatLng(24.822489,67.036632));
-
+//
 
 
                     //LatLngBound will cover all your marker on Google Maps
@@ -85,7 +83,9 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
 
                     // Setting a custom info window adapter for the google map
-                    MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getContext(),bus_list_classes);
+                    final Intent In_list=new Intent();
+                    In_list.putParcelableArrayListExtra("data_for_marker",bus_list_classes);
+                    MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getContext(),In_list);
                     mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
 
 
@@ -93,6 +93,10 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
                             marker.showInfoWindow();
+//                            String id = marker.getId();
+//                            id = id.replace("m","");
+//                            int i=Integer.parseInt(id);
+//                            show_pop_up(i);
                             return true;
                         }
                     });
@@ -100,7 +104,19 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                     mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                         @Override
                         public void onInfoWindowClick(Marker marker) {
-                            startActivity(new Intent(getContext(), Item_page.class));
+                            String id = marker.getId();
+                            id = id.replace("m","");
+                            int i=Integer.parseInt(id);
+
+                            Intent send=new Intent(getContext(), Item_page.class);
+                            send.putExtra("b_id",bus_list_classes.get(i).getB_id());
+                            send.putExtra("b_name",bus_list_classes.get(i).getB_name());
+                            send.putExtra("b_image",bus_list_classes.get(i).getB_image());
+                            send.putExtra("b_mobile",bus_list_classes.get(i).getB_mobile());
+                            send.putExtra("b_city",bus_list_classes.get(i).getB_city());
+                            send.putExtra("b_lat",bus_list_classes.get(i).getB_lat());
+                            send.putExtra("b_long",bus_list_classes.get(i).getB_long());
+                            startActivity(send);
                         }
                     });
 
@@ -110,4 +126,34 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
             }
         });
     }
+
+
+    //yet not used
+    private void show_pop_up(int i){
+        LayoutInflater factory = LayoutInflater.from(getContext());
+        final View DialogView = factory.inflate(R.layout.info_popup_marker, null);
+        final AlertDialog pop_up = new AlertDialog.Builder(getContext()).create();
+        pop_up.setView(DialogView);
+        TextView name = DialogView.findViewById(R.id.bus_map_name);
+        TextView contact = DialogView.findViewById(R.id.bus_map_contact);
+        TextView city = DialogView.findViewById(R.id.bus_map_city);
+        ImageView image = DialogView.findViewById(R.id.bus_map_img);
+        try {
+        if (bus_list_classes.size() > 0) {
+            name.setText("hi hello");  //bus_list_classes.get(i).getB_name()
+            contact.setText(bus_list_classes.get(i).getB_mobile());
+            city.setText(bus_list_classes.get(i).getB_city());
+            if(bus_list_classes.get(i).getB_image().isEmpty()){
+                image.setImageResource(R.drawable.banner);
+            }else {
+                Glide.with(getContext()).load(bus_list_classes.get(i).getB_image()).into(image);
+            }
+        }
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+        pop_up.show();
+    }
+
+
 }
