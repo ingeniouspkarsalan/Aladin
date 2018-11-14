@@ -55,7 +55,8 @@ public class JSONParser {
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 bus_list_class = new bus_list_class(jsonObject.getString("b_id"),jsonObject.getString("b_name"),jsonObject.getString("b_image"),
-                        jsonObject.getString("b_mobile"),jsonObject.getString("b_city"),jsonObject.getDouble("b_lat"),jsonObject.getDouble("b_long"));
+                        jsonObject.getString("b_mobile"),jsonObject.getString("b_city"),jsonObject.getDouble("b_lat"),jsonObject.getDouble("b_long")
+                ,jsonObject.getString("b_email"));
                 bus_list_classList.add(bus_list_class);
             }
             return bus_list_classList;

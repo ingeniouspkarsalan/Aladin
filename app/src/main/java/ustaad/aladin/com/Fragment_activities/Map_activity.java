@@ -93,10 +93,6 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
                             marker.showInfoWindow();
-//                            String id = marker.getId();
-//                            id = id.replace("m","");
-//                            int i=Integer.parseInt(id);
-//                            show_pop_up(i);
                             return true;
                         }
                     });
@@ -116,7 +112,8 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                             send.putExtra("b_city",bus_list_classes.get(i).getB_city());
                             send.putExtra("b_lat",bus_list_classes.get(i).getB_lat());
                             send.putExtra("b_long",bus_list_classes.get(i).getB_long());
-                            startActivity(send);
+                            send.putExtra("b_email",bus_list_classes.get(i).getB_email());
+                            getContext().startActivity(send);
                         }
                     });
 

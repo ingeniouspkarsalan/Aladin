@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class bus_list_class implements Parcelable{
     private  String b_id;
     private String b_name;
+    private String b_email;
     private String b_image;
     private String b_mobile;
     private String b_city;
@@ -13,7 +14,7 @@ public class bus_list_class implements Parcelable{
     private Double b_long;
 
 
-    public bus_list_class(String b_id, String b_name, String b_image, String b_mobile, String b_city, Double b_lat, Double b_long) {
+    public bus_list_class(String b_id, String b_name, String b_image, String b_mobile, String b_city, Double b_lat, Double b_long,String b_email) {
         this.b_id = b_id;
         this.b_name = b_name;
         this.b_image = b_image;
@@ -21,6 +22,7 @@ public class bus_list_class implements Parcelable{
         this.b_city = b_city;
         this.b_lat = b_lat;
         this.b_long = b_long;
+        this.b_email=b_email;
     }
 
 
@@ -32,6 +34,7 @@ public class bus_list_class implements Parcelable{
         b_city = in.readString();
         b_lat = in.readDouble();
         b_long = in.readDouble();
+        b_email=in.readString();
     }
 
     public static final Creator<bus_list_class> CREATOR = new Creator<bus_list_class>() {
@@ -60,6 +63,7 @@ public class bus_list_class implements Parcelable{
         dest.writeString(b_city);
         dest.writeDouble(b_lat);
         dest.writeDouble(b_long);
+        dest.writeString(b_email);
     }
 
     public String getB_id() {
@@ -88,5 +92,9 @@ public class bus_list_class implements Parcelable{
 
     public Double getB_long() {
         return b_long;
+    }
+
+    public String getB_email() {
+        return b_email;
     }
 }
