@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -23,12 +24,15 @@ public class Item_page extends AppCompatActivity {
      b_image ,
      b_mobile,
      b_city,
+     b_address,
+     b_detail,
      b_lat ,
      b_long ,
      b_email;
 
     private ImageView logo;
     private ImageButton call, email;
+    private TextView city,address,detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class Item_page extends AppCompatActivity {
         b_image = getIntent().getStringExtra("b_image");
         b_mobile = getIntent().getStringExtra("b_mobile");
         b_city = getIntent().getStringExtra("b_city");
+        b_address = getIntent().getStringExtra("b_address");
+        b_detail = getIntent().getStringExtra("b_detail");
         b_lat = getIntent().getStringExtra("b_lat");
         b_long = getIntent().getStringExtra("b_long");
         b_email = getIntent().getStringExtra("b_email");
@@ -77,6 +83,14 @@ public class Item_page extends AppCompatActivity {
                 startActivity(emailIntent);
             }
         });
+
+        city=findViewById(R.id.bus_card_city);
+        address=findViewById(R.id.bus_card_address);
+        detail=findViewById(R.id.bus_card_detail);
+
+        city.setText(b_city);
+        address.setText(b_address);
+        detail.setText(b_detail);
         }
 
     @Override

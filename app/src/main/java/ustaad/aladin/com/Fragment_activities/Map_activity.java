@@ -110,6 +110,8 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                             send.putExtra("b_image",bus_list_classes.get(i).getB_image());
                             send.putExtra("b_mobile",bus_list_classes.get(i).getB_mobile());
                             send.putExtra("b_city",bus_list_classes.get(i).getB_city());
+                            send.putExtra("b_address",bus_list_classes.get(i).getB_address());
+                            send.putExtra("b_detail",bus_list_classes.get(i).getB_detail());
                             send.putExtra("b_lat",bus_list_classes.get(i).getB_lat());
                             send.putExtra("b_long",bus_list_classes.get(i).getB_long());
                             send.putExtra("b_email",bus_list_classes.get(i).getB_email());
