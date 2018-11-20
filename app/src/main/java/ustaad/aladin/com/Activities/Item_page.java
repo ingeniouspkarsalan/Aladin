@@ -125,7 +125,7 @@ double lat,longt;
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        
+
         // Add a marker in Sydney and move the camera
         LatLng place = new LatLng(lat, longt);
         mMap.addMarker(new MarkerOptions().position(place).title(b_name));
