@@ -115,6 +115,8 @@ public class Map_activity extends Fragment implements OnMapReadyCallback {
                             send.putExtra("b_lat",bus_list_classes.get(i).getB_lat());
                             send.putExtra("b_long",bus_list_classes.get(i).getB_long());
                             send.putExtra("b_email",bus_list_classes.get(i).getB_email());
+                            send.putExtra("lat",bus_list_classes.get(i).getB_lat());
+                            send.putExtra("long",bus_list_classes.get(i).getB_long());
                             getContext().startActivity(send);
                         }
                     });

@@ -72,6 +72,8 @@ public class Adapter_business extends RecyclerView.Adapter<Adapter_business.busi
             send.putExtra("b_lat",bus_list_class.getB_lat());
             send.putExtra("b_long",bus_list_class.getB_long());
             send.putExtra("b_email",bus_list_class.getB_email());
+            send.putExtra("lat",bus_list_class.getB_lat());
+            send.putExtra("long",bus_list_class.getB_long());
             context.startActivity(send);
         }
     });

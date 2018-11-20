@@ -8,17 +8,25 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import ustaad.aladin.com.R;
 import ustaad.aladin.com.classes.Animation;
 
-public class Item_page extends AppCompatActivity {
+public class Item_page extends AppCompatActivity implements OnMapReadyCallback{
     String b_id ,
      b_name ,
      b_image ,
@@ -29,11 +37,12 @@ public class Item_page extends AppCompatActivity {
      b_lat ,
      b_long ,
      b_email;
+double lat,longt;
 
     private ImageView logo;
     private ImageButton call, email;
     private TextView city,address,detail;
-
+    private GoogleMap mMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +57,18 @@ public class Item_page extends AppCompatActivity {
         b_lat = getIntent().getStringExtra("b_lat");
         b_long = getIntent().getStringExtra("b_long");
         b_email = getIntent().getStringExtra("b_email");
+        lat = getIntent().getDoubleExtra("lat",0);
+        longt = getIntent().getDoubleExtra("long",0);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(b_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         init();
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     private void init() {
@@ -104,5 +120,15 @@ public class Item_page extends AppCompatActivity {
         Animation.fade(Item_page.this);
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        
+        // Add a marker in Sydney and move the camera
+        LatLng place = new LatLng(lat, longt);
+        mMap.addMarker(new MarkerOptions().position(place).title(b_name));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(place));
     }
 }

@@ -17,12 +17,10 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </android.support.design.widget.AppBarLayout>
-
-    <com.github.florent37.shapeofview.shapes.DiagonalView
+    <com.github.florent37.shapeofview.shapes.RoundRectView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:elevation="4dp"
         app:shape_diagonal_angle="10"
         app:shape_diagonal_direction="left"
@@ -35,35 +33,7 @@
             android:scaleType="fitXY"
             android:id="@+id/logo"/>
 
-    </com.github.florent37.shapeofview.shapes.DiagonalView>
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
-        <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:id="@+id/call"
-            android:src="@drawable/ic_phone_black_24dp"
-           android:background="@color/call_button"
-            />
-
-        <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:id="@+id/email"
-            android:src="@drawable/ic_email_black_24dp"
-            android:background="@color/colorPrimary"
-            />
-    </LinearLayout>
-
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -71,52 +41,159 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/card_view"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:padding="5dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text=" City"
-    android:layout_weight="1"
-    android:textSize="18sp"
-    android:id="@+id/bus_card_city"
-    android:textColor="@color/main_blue_color"
-    android:drawableStart="@drawable/ic_location_city_black_24dp"/>
-        </LinearLayout>
+            android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:padding="5dp"
+             android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:id="@+id/call"
+                android:padding="5dp"
+                android:src="@drawable/ic_phone_black_24dp"
+                android:background="@color/call_button"
+                />
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=" Address"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textSize="18sp"
-                android:id="@+id/bus_card_address"
-                android:textColor="@color/main_blue_color"
-                android:drawableTint="@color/material_blue_grey_95"
-                android:drawableStart="@drawable/ic_person_pin_black_24dp"/>
+                android:id="@+id/call_text"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/hint"
+                android:text="+923321234567"/>
         </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/email"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_email_black_24dp"
+                    android:background="@color/colorPrimary"
+                    />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=" Detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:textSize="18sp"
+                    android:padding="5dp"
+                    android:id="@+id/email_text"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/hint"
+                    android:text="abcd@gmail.com"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_location_city_black_24dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
+                    android:id="@+id/bus_card_city"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/hint"
+                    android:padding="5dp"
+                    android:text="abcd@gmail.com"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:background="@null"
+                    android:tint="@color/material_blue_grey_95"
+                    android:src="@drawable/ic_person_pin_black_24dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
+                    android:padding="5dp"
+                    android:id="@+id/bus_card_address"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/hint"
+                    android:text="abcd@gmail.com"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:background="@null"
+                    android:tint="@color/material_blue_grey_95"
+                    android:src="@drawable/ic_assignment_black_24dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
+                    android:padding="5dp"
                     android:id="@+id/bus_card_detail"
-                    android:textColor="@color/main_blue_color"
-                    android:drawableTint="@color/material_blue_grey_95"
-                    android:drawableStart="@drawable/ic_assignment_black_24dp"/>
+                    android:gravity="center_vertical"
+                    android:textColor="@color/hint"
+                    android:text="abcd@gmail.com"/>
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v7.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:padding="5dp"
+                android:orientation="vertical">
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
