@@ -1,11 +1,18 @@
 package ustaad.aladin.com.Activities;
 
+import android.content.DialogInterface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -53,6 +60,7 @@ public class Cat_business_list extends AppCompatActivity {
         toolbar.setTitle(cat_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        show_best_form();
         Init();
     }
 
@@ -141,5 +149,58 @@ public class Cat_business_list extends AppCompatActivity {
         Animation.fade(Cat_business_list.this);
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.cat_form, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clics on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.form) {
+            show_best_form();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void show_best_form(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+       final EditText edittext = new EditText(this);
+       edittext.setHint("Enter Your Message......");
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                120);
+        edittext.setLayoutParams(lp);
+        alert.setMessage("Your specification requirement for suggestion best deals.");
+        alert.setTitle("Fill this form and get best deals on "+cat_name);
+
+        alert.setView(edittext);
+
+        alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                String YouEditTextValue = edittext.getText().toString();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // what ever you want to do with No option.
+            }
+        });
+
+        alert.show();
     }
 }
