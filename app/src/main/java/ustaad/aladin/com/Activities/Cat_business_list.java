@@ -1,6 +1,7 @@
 package ustaad.aladin.com.Activities;
 
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -60,7 +61,13 @@ public class Cat_business_list extends AppCompatActivity {
         toolbar.setTitle(cat_name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        show_best_form();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                show_best_form();
+            }
+        }, 5000);
+
         Init();
     }
 
