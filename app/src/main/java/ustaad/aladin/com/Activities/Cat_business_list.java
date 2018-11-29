@@ -1,5 +1,6 @@
 package ustaad.aladin.com.Activities;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -51,6 +52,7 @@ public class Cat_business_list extends AppCompatActivity {
     private String cat_id,cat_name;
     private ViewPager viewPager;
     private ArrayList<bus_list_class> bus_list_classList;
+    private Dialog di;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,12 +151,22 @@ public class Cat_business_list extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Animation.fade(Cat_business_list.this);
+        try {
+            di.dismiss();
+        }catch (Exception e){
+
+        }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         Animation.fade(Cat_business_list.this);
         finish();
+        try {
+            di.dismiss();
+        }catch (Exception e){
+
+        }
         return super.onSupportNavigateUp();
     }
 
@@ -208,6 +220,11 @@ public class Cat_business_list extends AppCompatActivity {
             }
         });
 
-        alert.show();
+        di=alert.create();
+        di.show();
     }
+
+
+
+
 }
