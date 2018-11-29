@@ -182,7 +182,7 @@ public class Cat_business_list extends AppCompatActivity {
 
 
     private void show_best_form(){
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(Cat_business_list.this);
 
        final EditText edittext = new EditText(this);
        edittext.setHint("Enter Your Message......");
